@@ -1,0 +1,17 @@
+syntax = "proto3";
+package vita.vita;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "vita/vita/params.proto";
+
+option go_package = "vita/x/vita/types";
+
+// GenesisState defines the vita module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
