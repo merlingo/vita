@@ -1,0 +1,16 @@
+syntax = "proto3";
+package vita.labour;
+
+option go_package = "vita/x/labour/types";
+
+message Task {
+  uint64 id = 1;
+  uint64 taskId = 2; 
+  string assigner = 3; 
+  int32 state = 4; 
+  uint64 beginTask = 5; 
+  uint64 deadline = 6; 
+  uint64 finishTask = 7; 
+  string wager = 8; 
+  string creator = 9;
+}

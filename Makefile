@@ -107,3 +107,17 @@ govulncheck:
 	@govulncheck ./...
 
 .PHONY: govet govulncheck
+
+
+install-and-gen-protoc-ts: download-cosmos-proto install-protoc-gen-ts gen-protoc-ts
+
+build-linux:
+	GOOS=linux GOARCH=amd64 go build -o ./build/vitad-linux-amd64 ./cmd/vitad/main.go
+	GOOS=linux GOARCH=arm64 go build -o ./build/vitad-linux-arm64 ./cmd/vitad/main.go
+
+do-checksum-linux:
+	cd build && sha256sum \
+		vitad-linux-amd64 vitad-linux-arm64 \
+		> vita-checksum-linux
+
+build-with-checksum: build-linux do-checksum-linux

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package vita.gainsharing;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "vita/gainsharing/params.proto";
+import "vita/gainsharing/mechanism.proto";
+import "vita/gainsharing/performance.proto";
+
+option go_package = "vita/x/gainsharing/types";
+
+// GenesisState defines the gainsharing module's genesis state.
+message GenesisState {
+  
+  // params defines all the parameters of the module.
+           Params      params           = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  repeated Mechanism   mechanismList    = 2 [(gogoproto.nullable) = false] ;
+           uint64      mechanismCount   = 3;
+  repeated Performance performanceList  = 4 [(gogoproto.nullable) = false] ;
+           uint64      performanceCount = 5;
+}
+

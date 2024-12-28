@@ -1,0 +1,1 @@
+build'i alınmış vitad-linux-arm64 uygulamsı burada olmalı

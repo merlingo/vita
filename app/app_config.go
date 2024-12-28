@@ -53,7 +53,13 @@ import (
 	ibcexported "github.com/cosmos/ibc-go/v8/modules/core/exported"
 	"google.golang.org/protobuf/types/known/durationpb"
 
+	gainsharingmodulev1 "vita/api/vita/gainsharing/module"
+	labourmodulev1 "vita/api/vita/labour/module"
 	vitamodulev1 "vita/api/vita/vita/module"
+	_ "vita/x/gainsharing/module" // import for side-effects
+	gainsharingmoduletypes "vita/x/gainsharing/types"
+	_ "vita/x/labour/module" // import for side-effects
+	labourmoduletypes "vita/x/labour/types"
 	_ "vita/x/vita/module" // import for side-effects
 	vitamoduletypes "vita/x/vita/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
@@ -94,6 +100,8 @@ var (
 		circuittypes.ModuleName,
 		// chain modules
 		vitamoduletypes.ModuleName,
+		labourmoduletypes.ModuleName,
+		gainsharingmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -119,6 +127,8 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		vitamoduletypes.ModuleName,
+		labourmoduletypes.ModuleName,
+		gainsharingmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -138,6 +148,8 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		vitamoduletypes.ModuleName,
+		labourmoduletypes.ModuleName,
+		gainsharingmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -158,6 +170,7 @@ var (
 		{Account: ibctransfertypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner}},
 		{Account: ibcfeetypes.ModuleName},
 		{Account: icatypes.ModuleName},
+		{Account: gainsharingmoduletypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner, authtypes.Staking}},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 
@@ -296,6 +309,14 @@ var (
 			{
 				Name:   vitamoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&vitamodulev1.Module{}),
+			},
+			{
+				Name:   labourmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&labourmodulev1.Module{}),
+			},
+			{
+				Name:   gainsharingmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&gainsharingmodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

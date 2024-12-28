@@ -1,0 +1,68 @@
+version: "3.7"
+
+networks:
+  net-mert-kms:
+  net-mert:
+  net-yigit:
+  net-public:
+
+services:
+
+  kms-mert:
+    command: start --config /root/tmkms/tmkms.toml
+    container_name: kms-mert
+    image: tmkms_i:v0.12.2
+    volumes:
+      - ./kms-mert:/root/tmkms
+    networks:
+      - net-mert-kms
+
+  val-mert:
+    command: start
+    container_name: val-mert
+    image: vitad_tstnet
+    volumes:
+      - ./val-mert:/root/.vita
+    networks:
+      - net-mert-kms
+      - net-mert
+    depends_on:
+      - kms-mert
+
+  sentry-mert:
+    command: start
+    container_name: sentry-mert
+    image: vitad_tstnet
+    volumes:
+      - ./sentry-mert:/root/.vita
+    networks:
+      - net-mert
+      - net-public
+
+  val-yigit:
+    command: start
+    container_name: val-yigit
+    image: vitad_tstnet
+    volumes:
+      - ./val-yigit:/root/.vita
+    networks:
+      - net-yigit
+
+  sentry-yigit:
+    command: start
+    container_name: sentry-yigit
+    image: vitad_tstnet
+    volumes:
+      - ./sentry-yigit:/root/.vita
+    networks:
+      - net-yigit
+      - net-public
+
+  node-yasin:
+    command: start
+    container_name: node-yasin
+    image: vitad_tstnet
+    volumes:
+      - ./node-yasin:/root/.vita
+    networks:
+      - net-public

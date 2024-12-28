@@ -1,28 +1,33 @@
 version: 1
 validation: sovereign
 accounts: 
-- name: alice
+- name: mert
   coins:
-  - 20000token
-  - 200000000stake
-- name: bob
+  - 2000000000vita
+- name: yigit
   coins:
-  - 10000token
-  - 100000000stake
+  - 2000000000vita
+- name: carol
+  coins:
+  - 1000000000vita 
 client:
   openapi:
     path: docs/static/openapi.yml
 faucet:
-  name: bob
+  name: carol
   coins:
-  - 5token
-  - 100000stake
+  - 100000vita
+genesis:
+  app_state:
+    staking:
+      params:
+        bond_denom: vita
 validators:
-- name: alice
-  bonded: 100000000stake
-- name: validator1
-  bonded: 100000000stake
+- name: mert
+  bonded: 100000000vita
+- name: yigit
+  bonded: 100000000vita
 - name: validator2
-  bonded: 200000000stake
+  bonded: 200000000vita
 - name: validator3
-  bonded: 300000000stake
+  bonded: 300000000vita

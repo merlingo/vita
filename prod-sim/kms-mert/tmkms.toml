@@ -1,0 +1,29 @@
+# Tendermint KMS configuration file
+
+## Chain Configuration
+
+### Cosmos Hub Network
+
+[[chain]]
+id = "vita-1"
+key_format = { type = "bech32", account_key_prefix = "vitapub", consensus_key_prefix = "vitavalconspub" }
+state_file = "/root/tmkms/state/vita-1-consensus.json"
+
+## Signing Provider Configuration
+
+### Software-based Signer Configuration
+
+[[providers.softsign]]
+chain_ids = ["vita-1"]
+key_type = "consensus"
+path = "/root/tmkms/secrets/val-mert-consensus.key"
+
+## Validator Configuration
+
+[[validator]]
+chain_id = "vita-1"
+addr = "tcp://val-mert:26659"
+secret_key = "/root/tmkms/secrets/kms-identity.key"
+protocol_version = "v0.34"
+reconnect = true
+

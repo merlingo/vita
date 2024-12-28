@@ -1,0 +1,13 @@
+syntax = "proto3";
+package vita.gainsharing;
+
+option go_package = "vita/x/gainsharing/types";
+
+message Mechanism {
+  uint64 id = 1;
+  string metrics = 2; 
+  string coefficients = 3; 
+  string convergeLimit = 4; 
+  string slope = 5; 
+  string creator = 6;
+}

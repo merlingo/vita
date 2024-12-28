@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package vita.gainsharing;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "vita/gainsharing/params.proto";
+import "vita/gainsharing/mechanism.proto";
+import "vita/gainsharing/performance.proto";
+
+option go_package = "vita/x/gainsharing/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/vita/gainsharing/params";
+  
+  }
+  
+  // Queries a list of Mechanism items.
+  rpc Mechanism    (QueryGetMechanismRequest) returns (QueryGetMechanismResponse) {
+    option (google.api.http).get = "/vita/gainsharing/mechanism/{id}";
+  
+  }
+  rpc MechanismAll (QueryAllMechanismRequest) returns (QueryAllMechanismResponse) {
+    option (google.api.http).get = "/vita/gainsharing/mechanism";
+  
+  }
+  
+  // Queries a list of Performance items.
+  rpc Performance    (QueryGetPerformanceRequest) returns (QueryGetPerformanceResponse) {
+    option (google.api.http).get = "/vita/gainsharing/performance/{id}";
+  
+  }
+  rpc PerformanceAll (QueryAllPerformanceRequest) returns (QueryAllPerformanceResponse) {
+    option (google.api.http).get = "/vita/gainsharing/performance";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+message QueryGetMechanismRequest {
+  uint64 id = 1;
+}
+
+message QueryGetMechanismResponse {
+  Mechanism Mechanism = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllMechanismRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllMechanismResponse {
+  repeated Mechanism                              Mechanism  = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetPerformanceRequest {
+  uint64 id = 1;
+}
+
+message QueryGetPerformanceResponse {
+  Performance Performance = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllPerformanceRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllPerformanceResponse {
+  repeated Performance                            Performance = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination  = 2;
+}
+

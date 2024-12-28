@@ -1,0 +1,16 @@
+syntax = "proto3";
+package vita.gainsharing;
+
+option go_package = "vita/x/gainsharing/types";
+import "gogoproto/gogo.proto"; 
+import "cosmos/base/v1beta1/coin.proto"; 
+
+message Performance {
+  uint64 id = 1;
+  uint64 mid = 2; 
+  string tid = 3; 
+  cosmos.base.v1beta1.Coin wager = 4 [(gogoproto.nullable) = false]; 
+  cosmos.base.v1beta1.Coin reward = 5 [(gogoproto.nullable) = false]; 
+  string earner = 6; 
+  string creator = 7;
+}

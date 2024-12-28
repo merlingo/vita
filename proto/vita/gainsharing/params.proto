@@ -1,0 +1,15 @@
+syntax = "proto3";
+package vita.gainsharing;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "vita/x/gainsharing/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "vita/x/gainsharing/Params";
+  option (gogoproto.equal) = true;
+
+  
+}
